@@ -14,9 +14,29 @@
         Quiz Application
       </div>
     </header>
+    <section id="level-section" class=" container w-9/12 mx-auto shadow-xl p-4 mt-2 mb-2">
+      <div id="text" class="p-4 opacity-60 text-lg font-semibold border-b-2">
+        Please choose the level to start the quiz:
+      </div>
+      <div id="level-container">
+        <div>
+          <input type="radio" id="easy""/>
+          <label for="easy">Beginner</label>
+        </div>
+        <div>
+          <input type="radio" id="mid" />
+          <label for="mid">Intermediate</label>
+        </div>
+        <div>
+          <input type="radio" id="hard" />
+          <label for="hard">Professional</label>
+        </div>
+      </div>
+      <button class="btn-level">Start</button>
+    </section>
     <section
       id="quiz-container"
-      class="container w-9/12 mx-auto shadow-xl p-4 mt-2 mb-2"
+      class="hide container w-9/12 mx-auto shadow-xl p-4 mt-2 mb-2"
     >
       <div id="quiz-header" class="flex justify-between">
         <div
@@ -35,9 +55,7 @@
         <div
           id="timer"
           class="basis-1/3 bg-[#eee] flex items-center divide-x divide-[#ddd]"
-        >
-          
-        </div>
+        ></div>
       </div>
       <div id="qHeader" class="p-4 shadow-md my-4 font-semibold"></div>
       <div id="text" class="p-4 opacity-60 text-lg font-semibold border-b-2">
@@ -47,11 +65,7 @@
         id="answers-container"
         class="flex flex-col p-4 divide-y border-b-2"
       ></div>
-      <button
-        class="btn"
-      >
-        submit
-      </button>
+      <button class="btn">submit</button>
     </section>
     <script src="./main.js"></script>
   </body>
