@@ -1,11 +1,14 @@
 let quizContainer = <HTMLDivElement>document.getElementById("quiz-container");
+let levelContainer = <HTMLDivElement>document.getElementById("level-container");
+let levelSection = <HTMLDivElement>document.getElementById("level-section")
 let questionCtr = <HTMLDivElement>document.getElementById("text-number");
 let quizHeader = <HTMLDivElement>document.getElementById("quiz-header")
 let qHeader = <HTMLDivElement>document.getElementById("qHeader");
 let mainText = <HTMLDivElement>document.getElementById('text');
 let answersbox = <HTMLDivElement>document.getElementById("answers-container");
-let btn = <HTMLButtonElement>document.querySelector("button");
-let inputs = document.getElementsByTagName("input");
+let btn = <HTMLButtonElement>document.querySelector(".btn");
+let levelBtn = <HTMLButtonElement>document.querySelector(".btn-level");
+let inputs: any = document.getElementsByTagName("input");
 let timer = <HTMLDivElement>document.getElementById("timer");
 let hoursDiv: any = <HTMLDivElement>document.createElement("div");
 let minDiv: any = <HTMLDivElement>document.createElement("div");
@@ -14,25 +17,50 @@ let count: number = 0;
 let correctAnswers: number = 0;
 let answer: string = ""
 let rightAns: string = "";
+let seconds: number = 0;
 let hours: number = 0;
 let minutes: number = 0;
+let level: string = '';
+
+if (quizContainer.classList.contains('hide')) {
+    for (let index = 0; index < inputs.length; index++) {
+        inputs[index].onclick = () => level = inputs[index].id;
+    }
+    levelBtn.onclick = () => {
+        switch (level) {
+            case "easy":
+                seconds = 60;
+                break;
+            case "mid":
+                seconds = 40;
+                break;
+            default:
+                seconds = 20;
+        }
+        levelSection.className = "hide";
+        quizContainer.classList.remove("hide");
+        getQuestions();
+    }
+}
+
 
 
 async function getQuestions(): Promise<void> {
+    let sec=seconds;
     let data = (await fetch("./questions.json")).json();
     let questions: any[] = await data;
     let numOfQuestions: number = questions.length;
+    
     let hText = document.createTextNode(questions[count].question);
     qHeader.appendChild(hText);
     creatQuestionBox(questions[count].choices);
     rightAns = questions[count].answer;
     questionCtr.innerText = `Question NO.${count + 1} of ${numOfQuestions}`
-    let seconds: number = 11;
     const timerInterval = setInterval(
         () => {
-            if (seconds > 0) {
-                seconds--;
-                seconds < 10 ? secDiv.innerHTML = `0${seconds}` : secDiv.innerHTML = `${seconds}`;
+            if (sec > 0) {
+                sec--;
+                sec < 10 ? secDiv.innerHTML = `0${sec}` : secDiv.innerHTML = `${sec}`;
             }
             else {
                 clearInterval(timerInterval);
@@ -55,12 +83,14 @@ async function getQuestions(): Promise<void> {
             getQuestions();
         }
         else {
+            seconds=Infinity;
             qHeader.remove();
             answersbox.remove();
             btn.remove();
             quizHeader.remove();
             mainText.remove();
-            let result =<HTMLDivElement> document.createElement("div");
+            document.getElementById("text")?.remove();
+            let result = <HTMLDivElement>document.createElement("div");
             result.className = "result";
             result.innerText = `You have ${correctAnswers} correct answers`
             let tryBtn = <HTMLButtonElement>document.createElement("button");
@@ -97,7 +127,8 @@ function creatQuestionBox(labelTxt: string[]): void {
     }
 }
 
-getQuestions();
+
+
 
 
 
