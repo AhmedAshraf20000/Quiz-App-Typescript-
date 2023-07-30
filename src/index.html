@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Application</title>
+    <link rel="stylesheet" href="../src/all.min.css" />
+    <link rel="stylesheet" href="../dist/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <header class="bg-zinc-800 p-4">
+      <div class="container text-cyan-500 text-xl font-semibold">
+        Quiz Application
+      </div>
+    </header>
+    <section
+      id="quiz-container"
+      class="container w-9/12 mx-auto shadow-xl p-4 mt-2 mb-2"
+    >
+      <div id="quiz-header" class="flex justify-between">
+        <div
+          id="qNumbers"
+          class="basis-1/3 flex space-x-2 bg-[#eee] p-4 font-bold text-lg items-center"
+        >
+          <div class="w-6">
+            <img
+              src="../src/circle-exclamation-solid.svg"
+              alt="icon"
+              class="w-full"
+            />
+          </div>
+          <div id="text-number"></div>
+        </div>
+        <div
+          id="timer"
+          class="basis-1/3 bg-[#eee] flex items-center divide-x divide-[#ddd]"
+        >
+          
+        </div>
+      </div>
+      <div id="qHeader" class="p-4 shadow-md my-4 font-semibold"></div>
+      <div id="text" class="p-4 opacity-60 text-lg font-semibold border-b-2">
+        Please choose one of the following answers:
+      </div>
+      <div
+        id="answers-container"
+        class="flex flex-col p-4 divide-y border-b-2"
+      ></div>
+      <button
+        class="btn"
+      >
+        submit
+      </button>
+    </section>
+    <script src="./main.js"></script>
+  </body>
+</html>
