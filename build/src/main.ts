@@ -46,11 +46,11 @@ if (quizContainer.classList.contains('hide')) {
 
 
 async function getQuestions(): Promise<void> {
-    let sec=seconds;
+    let sec = seconds;
     let data = (await fetch("./questions.json")).json();
     let questions: any[] = await data;
     let numOfQuestions: number = questions.length;
-    
+
     let hText = document.createTextNode(questions[count].question);
     qHeader.appendChild(hText);
     creatQuestionBox(questions[count].choices);
@@ -83,7 +83,7 @@ async function getQuestions(): Promise<void> {
             getQuestions();
         }
         else {
-            seconds=Infinity;
+            seconds = Infinity;
             qHeader.remove();
             answersbox.remove();
             btn.remove();
@@ -117,6 +117,7 @@ function creatQuestionBox(labelTxt: string[]): void {
         label.textContent = `${i}."${labelTxt[i - 1]}"`;
         input.type = "radio";
         input.setAttribute("id", `answer-${i}`)
+        input.setAttribute("name", "answer");
         input.dataset.answer = labelTxt[i - 1];
         input.onclick = () => {
             answer = labelTxt[i - 1];
